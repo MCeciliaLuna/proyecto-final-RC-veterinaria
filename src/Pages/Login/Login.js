@@ -1,9 +1,11 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import './Login.css';
 import logoLogin from '../assests/images/logo.png'
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = async(data) => {
     const resp = await fetch('http://localhost:8000/login', {
@@ -14,9 +16,19 @@ const Login = () => {
       }
     })
     const json = await resp.json()
-
+    navigate("/usuarioregistrado", { replace: true });
     console.log(json)
   }
+
+  // function SignupForm() {
+  //   const navigate = useNavigate();
+  
+  //   async function handleSubmit(event) {
+  //     event.preventDefault();
+  //     await submitForm(event.target);
+  //     navigate("/usuarioregistrado", { replace: true });
+  //   }
+  // }
 
   return (
     <div className="formulario-login d-inline-flex">
